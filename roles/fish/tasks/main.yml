@@ -1,0 +1,5 @@
+- name: link config.fish
+  file:
+    src: "{{ role_path }}/files/config.fish"
+    dest: "{{ ansible_env.HOME }}/config.fish"
+    state: link

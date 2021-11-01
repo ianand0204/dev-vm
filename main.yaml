@@ -1,0 +1,18 @@
+---
+- name: stage0 
+  hosts: all
+  roles:
+    - stage0
+  tags:
+    - stage0
+
+- name: base
+  hosts: all
+  roles:
+    - base
+
+- name: User configuration
+  hosts: all
+  roles:
+    - fish
+

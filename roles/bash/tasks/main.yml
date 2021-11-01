@@ -1,0 +1,5 @@
+- name: link tmux.conf
+  file:
+    src: "{{ role_path }}/files/bash_profile"
+    dest: "{{ ansible_env.HOME }}/.bash_profile"
+    state: link

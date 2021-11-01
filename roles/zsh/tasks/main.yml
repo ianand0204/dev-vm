@@ -1,0 +1,13 @@
+- name: Make sure zsh is installed
+  homebrew: name=zsh state=latest
+
+- git:
+    repo: 'https://github.com/robbyrussell/oh-my-zsh.git'
+    dest: ~/.oh-my-zsh
+    update: no
+
+- name: link tmux.conf
+  file:
+    src: "{{ role_path }}/files/zshrc"
+    dest: "{{ ansible_env.HOME }}/.zshrc"
+    state: link

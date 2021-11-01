@@ -1,0 +1,21 @@
+---
+- name: Docker and fish for localuser reqs
+  community.general.pacman:
+    state: present
+    name:
+      - docker
+      - fish
+
+- name: Create local account
+  ansible.builtin.user:
+    name: ian
+    password: $6$BpBwhQsLt5fMoWBq$5eO2L7zm0HPFW8hD8ycp8VzuBfQ1jwBtctgBiV9FeGhr4iaScVRxME8ACvzkgwnpUNXeMZRUeUv5GW6OuEucI/
+    shell: /usr/bin/fish
+    groups:
+      - wheel
+      - docker
+
+- name: Create sudoers.d for wheel group
+  copy:
+    dest: "/etc/sudoers.d/wheel"
+    content: "%wheel ALL=(ALL) NOPASSWD: ALL"

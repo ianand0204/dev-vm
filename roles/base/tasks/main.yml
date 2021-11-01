@@ -1,0 +1,12 @@
+---
+- name: Install some packages
+  community.general.pacman:
+    state: present
+    name:
+      - fzf
+      - alacritty
+      - i3-wm
+      - i3status
+      - lightdm
+      - rofi
+      - xclip

@@ -1,0 +1,5 @@
+## Setup of macbookpro
+
+``` ansible-galaxy install -r requirements.yml ```
+
+``` ansible-playbook -i hosts main.yml ```
