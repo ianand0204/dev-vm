@@ -29,6 +29,7 @@
   ansible.builtin.git:
     repo: https://aur.archlinux.org/yay.git
     dest: /tmp/yay
+    accept_hostkey: yes
 
 - name: Build and Install yay
   become: yes
@@ -72,5 +73,13 @@
     - {source: "templates/HOME_.ssh_config", dest: "{{local_home}}/.ssh/config", mode: '0644', backup: "yes"}
     - {source: "templates/github.priv", dest: "{{local_home}}/.ssh/github.priv", mode: '0600', backup: "no"}
     - {source: "templates/github.pub", dest: "{{local_home}}/.ssh/github.pub", mode: '0644', backup: "no"}
+
+- name: Clone our own repo
+  become: yes
+  become_user: ian
+  ansible.builtin.git:
+    repo: git@github.com:ianand0204/dev-vm.git
+    dest: /home/ian/dev-vm
+    accept_hostkey: yes
 
 
