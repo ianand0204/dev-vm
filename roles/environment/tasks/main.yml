@@ -1,0 +1,13 @@
+- name: link Xresources
+  file:
+    src: "{{ role_path }}/files/Xresources"
+    dest: "{{ ansible_env.HOME }}/.Xresources"
+    state: link
+
+- name: link inputrc
+  file:
+    src: "{{ role_path }}/files/inputrc"
+    dest: "{{ ansible_env.HOME }}/.inputrc"
+    state: link
+
+

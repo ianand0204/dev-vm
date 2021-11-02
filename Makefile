@@ -40,7 +40,7 @@ vm/bootstrap0:
 		mount /dev/disk/by-label/arch /mnt; \
 		mkdir -p /mnt/boot; \
 		mount /dev/disk/by-label/boot /mnt/boot; \
-		pacstrap /mnt vim sudo grub efibootmgr linux linux-lts base base-devel linux-firmware ansible openssh rsync; \
+		pacstrap /mnt sudo grub efibootmgr linux linux-lts base base-devel linux-firmware ansible openssh rsync neovim; \
 		genfstab -U /mnt >> /mnt/etc/fstab; \
 		ln -sf /mnt/usr/share/zoneinfo/America/Los_Angeles /mnt/etc/localtime; \
 		sed -i 's/#en.US-UTF8 UTF-8/en.US-UTF8 UTF-8/' /mnt/etc/locale.gen; \

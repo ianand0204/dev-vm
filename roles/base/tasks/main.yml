@@ -1,8 +1,12 @@
 ---
 - name: Install some packages
+  become: yes
+  become_user: root
   community.general.pacman:
     state: present
     name:
+      - bat
+      - fd
       - fzf
       - go
       - alacritty
@@ -18,6 +22,8 @@
       - xorg-server
 
 - name: Enable some services
+  become: yes
+  become_user: root
   ansible.builtin.systemd:
     name: lightdm
     enabled: yes

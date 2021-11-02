@@ -1,5 +1,24 @@
 - name: link config.fish
   file:
     src: "{{ role_path }}/files/config.fish"
-    dest: "{{ ansible_env.HOME }}/config.fish"
+    dest: "{{ ansible_env.HOME }}/.config/fish/config.fish"
     state: link
+    force: yes
+
+- name: Download fisher plugin manager
+  ansible.builtin.get_url:
+    url: https://git.io/fisher
+    dest: /tmp/fisher
+
+- name: Install fisher plugin manager
+  ansible.builtin.shell: "source /tmp/fisher && fisher install jorgebucaran/fisher"
+  args:
+    executable: /usr/bin/fish
+    creates: /home/ian/.config/fish/functions/conf.d/fzf.fish
+
+    
+- name: Install fzf plugin for fish
+  ansible.builtin.shell: "fisher install PatrickF1/fzf.fish"
+  args:
+    executable: /usr/bin/fish
+    creates: /home/ian/.config/fish/functions/fzf.fish

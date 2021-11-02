@@ -10,14 +10,7 @@
 
 - name: base
   hosts: all
-  become: yes
-  become_user: root
   roles:
     - base
-
-- name: User configuration
-  hosts: all
-  become: no
-  roles:
     - fish
-
+    - environment

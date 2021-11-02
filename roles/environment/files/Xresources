@@ -1,0 +1,9 @@
+! URXVT FONT SETTINGS
+!------------------------------------------------
+Xft.dpi: 180
+Xft.autohint: true
+Xft.antialias: true
+Xft.hinting: true
+Xft.hintstyle: hintslight
+Xft.rgba: rgb
+Xft.lcdfilter: lcddefault
