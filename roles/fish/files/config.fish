@@ -37,3 +37,9 @@ set -U fish_pager_color_prefix white --bold --underline
 set -U fish_pager_color_progress brwhite --background=cyan
 
 alias vi="nvim"
+set LANG "en_US.UTF-8"
+set LC_CTYPE "en_US.UTF-8"
+set LC_ALL "en_US.UTF-8"
+set EDITOR "nvim"
+set PAGER "less -FirSwX"
+set MANPAGER "less -FirSwX"

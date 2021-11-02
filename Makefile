@@ -40,12 +40,13 @@ vm/bootstrap0:
 		mount /dev/disk/by-label/arch /mnt; \
 		mkdir -p /mnt/boot; \
 		mount /dev/disk/by-label/boot /mnt/boot; \
-		pacstrap /mnt sudo grub efibootmgr linux linux-lts base base-devel linux-firmware ansible openssh rsync neovim; \
+		pacstrap /mnt sudo grub efibootmgr linux linux-lts base base-devel linux-firmware ansible openssh rsync neovim xf86-input-vmmouse xf86-video-vmware mesa; \
+		echo "needs_root_rights=yes" > /mnt/etc/X11/Xwrapper.config; \
 		genfstab -U /mnt >> /mnt/etc/fstab; \
 		ln -sf /mnt/usr/share/zoneinfo/America/Los_Angeles /mnt/etc/localtime; \
 		sed -i 's/#en.US-UTF8 UTF-8/en.US-UTF8 UTF-8/' /mnt/etc/locale.gen; \
 		arch-chroot /mnt local-gen; \
-		echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf; \
+		arch-chroot /mnt localectl set-locale LANG=en_US.UTF-8; \
 		echo $(VMNAME) > /mnt/etc/hostname; \
 		sed -i 's/MODULES=()/MODULES=($(MODULES))/' /mnt/etc/mkinitcpio.conf; \
 		sed -i 's/HOOKS=()/HOOKS=($(HOOKS))/' /mnt/etc/mkinitcpio.conf; \
@@ -55,6 +56,8 @@ vm/bootstrap0:
 		arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg; \
 		arch-chroot /mnt systemctl enable systemd-networkd; \
 		arch-chroot /mnt systemctl enable systemd-resolved; \
+		arch-chroot /mnt systemctl enable vmtoolsd; \
+		arch-chroot /mnt systemctl enable vmware-vmblock-fuse; \
 		arch-chroot /mnt systemctl enable sshd; \
 		cp -f /etc/systemd/network/20-* /mnt/etc/systemd/network; \
 		echo "root:root" | chpasswd -R /mnt; \

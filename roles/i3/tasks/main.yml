@@ -1,0 +1,20 @@
+- name: created dirs if not present
+  file:
+    state: directory
+    path: "{{item}}"
+  with_items:
+    - "/home/ian/.config/i3"
+    - "/home/ian/.config/i3status"
+
+- name: link i3 config
+  file:
+    src: "{{ role_path }}/files/i3config"
+    dest: "{{ ansible_env.HOME }}/.config/i3/config"
+    state: link
+
+- name: link i3status config
+  file:
+    src: "{{ role_path }}/files/i3status"
+    dest: "{{ ansible_env.HOME }}/.config/i3status/config"
+    state: link
+
