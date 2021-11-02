@@ -9,7 +9,7 @@
       - fd
       - fzf
       - go
-      - alacritty
+      - kitty
       - i3-wm
       - i3status
       - lightdm

@@ -1,0 +1,5 @@
+- name: link kitty
+  file:
+    src: "{{ role_path }}/files/kitty.conf"
+    dest: "{{ ansible_env.HOME }}/.config/kitty/kitty.conf"
+    state: link

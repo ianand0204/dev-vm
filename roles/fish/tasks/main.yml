@@ -22,3 +22,9 @@
   args:
     executable: /usr/bin/fish
     creates: /home/ian/.config/fish/functions/fzf.fish
+
+- name: Install dracula fish theme
+  ansible.builtin.shell: "fisher install dracula/fish"
+  args:
+    executable: /usr/bin/fish
+    creates: /home/ian/.config/fish/conf.d/dracula.fish
