@@ -80,7 +80,7 @@ vm/ansible/stage0:
 	ssh $(SSH_OPTIONS) -p$(VMPORT) root@$(VMADDR) " \
 		cd /dotfiles; \
 		ansible-galaxy install -r requirements.yml; \
-		ansible-playbook -i hosts main.yaml --tags stage0; \
+		ansible-playbook -i hosts main.yaml --tags stage0 --ask-vault-password; \
 	"
 
 ansible:

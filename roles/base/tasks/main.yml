@@ -23,15 +23,12 @@
     name: github_ssh
 
 - name: Setup SSH dir and perms
+  become: true
+  become_user: ian
   ansible.builtin.file:
     state: directory
-    path: "{{local_home}}/.ssh"
+    path: "/home/ian/.ssh"
     mode: '0700'
-  vars:
-    local_home: "{{ lookup('env','HOME') }}"
-    local_user: ian
-  with_items:
-    - {pathdir: "{{local_home}}/.ssh", mode: 0700}
 
 - shell: echo {{github_ssh_private}} |base64 --decode
   register: ssh_private_key_decoded
@@ -39,18 +36,18 @@
 - name: Setup SSH keys
   ansible.builtin.template:
     state: file
-    path: "{{source}}"
-    destination: "{{dest}}"
-    mode: "{{mode}}"
-    owner: "{{local_user}}"
-    backup: "{{backup}}"
+    path: "{{i item.path }}"
+    destination: "{{ item.destination }}"
+    mode: "{{ item.mode }}"
+    owner: "{{ local_user }}"
+    backup: "{{ item.backup }}"
   vars:
     local_home: "{{ lookup('env','HOME') }}"
     local_user: ian
   with_items:
-    - {source: "templates/HOME_.ssh_config", dest: "{{local_home}}/.ssh/config", mode: '0644', backup: "yes"}
-    - {source: "templates/github.priv", dest: "{{local_home}}/.ssh/github.priv", mode: '000', backup: "no"}
-    - {source: "templates/github.pub", dest: "{{local_home}}/.ssh/github.pub", mode: '0644', backup: "no"}
+    - {path: "templates/HOME_.ssh_config", destination: "{{local_home}}/.ssh/config", mode: '0644', backup: "yes"}
+    - {path: "templates/github.priv", destination: "{{local_home}}/.ssh/github.priv", mode: '000', backup: "no"}
+    - {path: "templates/github.pub", destination: "{{local_home}}/.ssh/github.pub", mode: '0644', backup: "no"}
   
 - name: Enable some services
   ansible.builtin.systemd:

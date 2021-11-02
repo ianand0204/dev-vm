@@ -36,3 +36,41 @@
   ansible.builtin.shell:
     chdir: /tmp/yay
     cmd: /usr/bin/makepkg -si --noconfirm --noprogressbar --nocolor
+
+- name: Load github keys
+  ansible.builtin.include_vars:
+    file: vars/github.yml
+
+- name: Setup SSH dir and perms
+  become: yes
+  become_user: ian
+  ansible.builtin.file:
+    state: directory
+    path: "{{local_home}}/.ssh"
+    mode: '0700'
+    owner: "{{ local_user }}"
+  vars:
+    local_home: "/home/ian"
+    local_user: ian
+
+- shell: echo {{github_ssh_private}} |base64 --decode
+  register: github_private_key_decoded
+
+- name: Setup SSH keys
+  become: yes
+  become_user: ian
+  ansible.builtin.template:
+    src: "{{item.source}}"
+    dest: "{{item.dest}}"
+    mode: "{{item.mode}}"
+    owner: "{{local_user}}"
+    backup: "{{item.backup}}"
+  vars:
+    local_home: "/home/ian"
+    local_user: ian
+  with_items:
+    - {source: "templates/HOME_.ssh_config", dest: "{{local_home}}/.ssh/config", mode: '0644', backup: "yes"}
+    - {source: "templates/github.priv", dest: "{{local_home}}/.ssh/github.priv", mode: '0600', backup: "no"}
+    - {source: "templates/github.pub", dest: "{{local_home}}/.ssh/github.pub", mode: '0644', backup: "no"}
+
+
