@@ -1,6 +1,8 @@
 ---
 - name: stage0 
   hosts: all
+  become: yes
+  become_user: root
   roles:
     - stage0
   tags:
@@ -8,11 +10,14 @@
 
 - name: base
   hosts: all
+  become: yes
+  become_user: root
   roles:
     - base
 
 - name: User configuration
   hosts: all
+  become: no
   roles:
     - fish
 

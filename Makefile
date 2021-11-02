@@ -62,8 +62,7 @@ vm/bootstrap0:
 
 vm/bootstrap:
 	VMUSER=root $(MAKE) vm/copy
-	VMUSER=root $(MAKE) vm/ansible
-	$(MAKE) vm/secrets
+	VMUSER=root $(MAKE) vm/ansible/stage0
 	ssh $(SSH_OPTIONS) -p$(VMPORT) $(VMUSER)@$(VMADDR) " \
 		sudo reboot; \
 	"
@@ -77,10 +76,13 @@ vm/copy:
 		$(MAKEFILE_DIR)/ $(VMUSER)@$(VMADDR):/dotfiles;" \
 	"
 
-vm/ansible:
+vm/ansible/stage0:
 	ssh $(SSH_OPTIONS) -p$(VMPORT) root@$(VMADDR) " \
 		cd /dotfiles; \
 		ansible-galaxy install -r requirements.yml; \
 		ansible-playbook -i hosts main.yaml --tags stage0; \
 	"
 
+ansible:
+	ansible-galaxy install -r requirements.yml;
+	ansible-playbook -i hosts main.yaml --skip-tags stage0;

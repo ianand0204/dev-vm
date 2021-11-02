@@ -1,10 +1,13 @@
 ---
-- name: Docker and fish for localuser reqs
+- name: Stage0 packages for basic utilities
   community.general.pacman:
     state: present
     name:
       - docker
       - fish
+      - jq
+      - git
+      - go
 
 - name: Create local account
   ansible.builtin.user:
@@ -19,3 +22,17 @@
   copy:
     dest: "/etc/sudoers.d/wheel"
     content: "%wheel ALL=(ALL) NOPASSWD: ALL"
+
+- name: Clone yay
+  become: yes
+  become_user: ian
+  ansible.builtin.git:
+    repo: https://aur.archlinux.org/yay.git
+    dest: /tmp/yay
+
+- name: Build and Install yay
+  become: yes
+  become_user: ian
+  ansible.builtin.shell:
+    chdir: /tmp/yay
+    cmd: /usr/bin/makepkg -si --noconfirm --noprogressbar --nocolor

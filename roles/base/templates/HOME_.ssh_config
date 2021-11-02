@@ -1,0 +1,6 @@
+Host *
+    ServerAliveInterval 30
+    ServerAliveCountMax 5
+
+Host github.com
+    IdentityFile ~/.ssh/github.priv

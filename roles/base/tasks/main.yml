@@ -4,9 +4,56 @@
     state: present
     name:
       - fzf
+      - go
       - alacritty
       - i3-wm
       - i3status
       - lightdm
+      - lightdm-gtk-greeter
+      - gtkmm3
+      - open-vm-tools
       - rofi
       - xclip
+      - xorg
+      - xorg-server
+
+- name: Load github keys
+  ansible.builtin.include_vars:
+    file: github.yml
+    name: github_ssh
+
+- name: Setup SSH dir and perms
+  ansible.builtin.file:
+    state: directory
+    path: "{{local_home}}/.ssh"
+    mode: '0700'
+  vars:
+    local_home: "{{ lookup('env','HOME') }}"
+    local_user: ian
+  with_items:
+    - {pathdir: "{{local_home}}/.ssh", mode: 0700}
+
+- shell: echo {{github_ssh_private}} |base64 --decode
+  register: ssh_private_key_decoded
+
+- name: Setup SSH keys
+  ansible.builtin.template:
+    state: file
+    path: "{{source}}"
+    destination: "{{dest}}"
+    mode: "{{mode}}"
+    owner: "{{local_user}}"
+    backup: "{{backup}}"
+  vars:
+    local_home: "{{ lookup('env','HOME') }}"
+    local_user: ian
+  with_items:
+    - {source: "templates/HOME_.ssh_config", dest: "{{local_home}}/.ssh/config", mode: '0644', backup: "yes"}
+    - {source: "templates/github.priv", dest: "{{local_home}}/.ssh/github.priv", mode: '000', backup: "no"}
+    - {source: "templates/github.pub", dest: "{{local_home}}/.ssh/github.pub", mode: '0644', backup: "no"}
+  
+- name: Enable some services
+  ansible.builtin.systemd:
+    name: lightdm
+    enabled: yes
+
