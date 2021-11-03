@@ -1,11 +1,5 @@
-- name: created dirs if not present
-  file:
-    state: directory
-    path: "{{item}}"
-  with_items:
-    - "/home/ian/.config/lightdm"
-
 - name: install dracula gtk theme
+  become: true
   ansible.builtin.pacman:
     state: present
     name:
@@ -19,6 +13,7 @@
     executable: yay
 
 - name: Enable gtk greeter in lightdm
+  become: true
   ansible.builtin.lineinfile:
     path: /etc/lightdm/lightdm.conf
     regexp: '^#greeter-session='

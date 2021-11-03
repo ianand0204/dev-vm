@@ -38,3 +38,8 @@
   args:
     executable: /usr/bin/fish
     creates: /home/ian/.share/omf/themes/bobthefish
+
+- name: Disable right prompt clock in bobthefish
+  ansible.builtin.copy:
+    dest: "/home/ian/.config/fish/functions/fish_right_prompt.fish"
+    content: "function fish_right_prompt; end"

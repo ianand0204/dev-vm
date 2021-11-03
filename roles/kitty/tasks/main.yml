@@ -1,3 +1,10 @@
+- name: created dirs if not present for kitty
+  file:
+    state: directory
+    path: "{{item}}"
+  with_items:
+    - "/home/ian/.config/kitty"
+
 - name: link kitty
   file:
     src: "{{ role_path }}/files/kitty.conf"
