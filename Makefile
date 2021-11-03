@@ -40,7 +40,7 @@ vm/bootstrap0:
 		mount /dev/disk/by-label/arch /mnt; \
 		mkdir -p /mnt/boot; \
 		mount /dev/disk/by-label/boot /mnt/boot; \
-		pacstrap /mnt sudo grub efibootmgr linux linux-lts base base-devel linux-firmware ansible openssh rsync neovim xf86-input-vmmouse xf86-video-vmware mesa; \
+		pacstrap /mnt sudo grub efibootmgr linux linux-lts base base-devel linux-firmware ansible openssh rsync neovim xf86-input-vmmouse xf86-video-vmware mesa gtkmm3 open-vm-tools; \
 		echo "needs_root_rights=yes" > /mnt/etc/X11/Xwrapper.config; \
 		genfstab -U /mnt >> /mnt/etc/fstab; \
 		ln -sf /mnt/usr/share/zoneinfo/America/Los_Angeles /mnt/etc/localtime; \

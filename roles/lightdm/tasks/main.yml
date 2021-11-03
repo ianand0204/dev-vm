@@ -18,6 +18,12 @@
     state: present
     executable: yay
 
+- name: Enable gtk greeter in lightdm
+  ansible.builtin.lineinfile:
+    path: /etc/lightdm/lightdm.conf
+    regexp: '^#greeter-session='
+    line: greeter-session=lightdm-gtk-greeter
+
 - name: link lightdm config
   become: true
   file:
