@@ -44,7 +44,7 @@ vm/bootstrap0:
 		echo "needs_root_rights=yes" > /mnt/etc/X11/Xwrapper.config; \
 		genfstab -U /mnt >> /mnt/etc/fstab; \
 		ln -sf /mnt/usr/share/zoneinfo/America/Los_Angeles /mnt/etc/localtime; \
-		sed -i 's/#en.US-UTF8 UTF-8/en.US-UTF8 UTF-8/' /mnt/etc/locale.gen; \
+		sed -i 's/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /mnt/etc/locale.gen; \
 		arch-chroot /mnt local-gen; \
 		arch-chroot /mnt localectl set-locale LANG=en_US.UTF-8; \
 		echo $(VMNAME) > /mnt/etc/hostname; \
