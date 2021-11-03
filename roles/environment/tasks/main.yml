@@ -10,4 +10,8 @@
     dest: "{{ ansible_env.HOME }}/.inputrc"
     state: link
 
-
+- name: install ttf-fira-fonts
+  ansible.builtin.pacman:
+    state: present
+    name:
+      - ttf-fira-code

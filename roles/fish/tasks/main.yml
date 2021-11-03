@@ -5,17 +5,27 @@
     state: link
     force: yes
 
+- name: Download oh-my-fish
+  ansible.builtin.get_url:
+    url: https://get.oh-my.fish
+    dest: /tmp/oh-my-fish
+
 - name: Download fisher plugin manager
   ansible.builtin.get_url:
     url: https://git.io/fisher
     dest: /tmp/fisher
 
 - name: Install fisher plugin manager
+  ansible.builtin.shell: "fish /tmp/oh-my-fish --path=~/.local/share/omf --config=~/.config/omf"
+  args:
+    executable: /usr/bin/fish
+    creates: /home/ian/.config/omf
+
+- name: Install fisher plugin manager
   ansible.builtin.shell: "source /tmp/fisher && fisher install jorgebucaran/fisher"
   args:
     executable: /usr/bin/fish
     creates: /home/ian/.config/fish/functions/conf.d/fzf.fish
-
     
 - name: Install fzf plugin for fish
   ansible.builtin.shell: "fisher install PatrickF1/fzf.fish"
@@ -23,8 +33,8 @@
     executable: /usr/bin/fish
     creates: /home/ian/.config/fish/functions/fzf.fish
 
-- name: Install dracula fish theme
-  ansible.builtin.shell: "fisher install dracula/fish"
+- name: Install bobthefish
+  ansible.builtin.shell: "omf install bobthefish"
   args:
     executable: /usr/bin/fish
-    creates: /home/ian/.config/fish/conf.d/dracula.fish
+    creates: /home/ian/.share/omf/themes/bobthefish

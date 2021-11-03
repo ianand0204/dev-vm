@@ -1,3 +1,16 @@
+- name: Install additional packages to make things purdy
+  become: yes
+  become_user: root
+  community.general.pacman:
+    state: present
+    name:
+      - i3-wm
+      - i3status
+      - rofi
+      - dex
+      - powerline
+      - powerline-fonts
+
 - name: created dirs if not present
   file:
     state: directory
@@ -5,6 +18,7 @@
   with_items:
     - "/home/ian/.config/i3"
     - "/home/ian/.config/i3status"
+    - "/home/ian/.config/rofi"
 
 - name: link i3 config
   file:
@@ -16,5 +30,11 @@
   file:
     src: "{{ role_path }}/files/i3status"
     dest: "{{ ansible_env.HOME }}/.config/i3status/config"
+    state: link
+
+- name: link rofi config
+  file:
+    src: "{{ role_path }}/files/rofi"
+    dest: "{{ ansible_env.HOME }}/.config/rofi/config.rasi"
     state: link
 

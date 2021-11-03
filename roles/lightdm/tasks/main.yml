@@ -1,0 +1,36 @@
+- name: created dirs if not present
+  file:
+    state: directory
+    path: "{{item}}"
+  with_items:
+    - "/home/ian/.config/lightdm"
+
+- name: install dracula gtk theme
+  ansible.builtin.pacman:
+    state: present
+    name:
+      - lightdm
+      - lightdm-gtk-greeter
+
+- name: install dracula gtk theme
+  ansible.builtin.pacman:
+    name: dracula-gtk-theme
+    state: present
+    executable: yay
+
+- name: link lightdm config
+  become: true
+  file:
+    src: "{{ role_path }}/files/lightdm-gtk-greeter.conf"
+    dest: "/etc/lightdm/lightdm-gtk-greeter.conf"
+    state: link
+    force: true
+
+- name: Enable some services
+  become: yes
+  become_user: root
+  ansible.builtin.systemd:
+    name: lightdm
+    enabled: yes
+
+
