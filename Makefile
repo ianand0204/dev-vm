@@ -61,6 +61,7 @@ vm/bootstrap0:
 		arch-chroot /mnt systemctl enable sshd; \
 		cp -f /etc/systemd/network/20-* /mnt/etc/systemd/network; \
 		echo "root:root" | chpasswd -R /mnt; \
+		reboot; \
 	"
 
 vm/bootstrap:
@@ -84,6 +85,7 @@ vm/ansible/stage0:
 		cd /dotfiles; \
 		ansible-galaxy install -r requirements.yml; \
 		ansible-playbook -i hosts main.yaml --tags stage0 --ask-vault-password; \
+		reboot; \
 	"
 
 ansible:
