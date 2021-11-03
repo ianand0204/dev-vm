@@ -11,6 +11,7 @@
     state: link
 
 - name: install ttf-fira-fonts
+  become: true
   ansible.builtin.pacman:
     state: present
     name:
