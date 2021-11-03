@@ -12,6 +12,14 @@
       - kitty
       - gtkmm3
       - open-vm-tools
+      - wget
       - xclip
       - xorg
       - xorg-server
+
+- name: Disable PC Speaker
+  become: yes
+  become_user: root
+  ansible.builtin.copy:
+    dest: "/etc/modprobe.d/nobeep.conf"
+    content: "blacklist pcspkr"
