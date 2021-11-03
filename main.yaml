@@ -14,5 +14,6 @@
     - base
     - fish
     - environment
+    - lightdm
     - i3
     - kitty
