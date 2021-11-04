@@ -15,7 +15,7 @@
     url: https://git.io/fisher
     dest: /tmp/fisher
 
-- name: Install fisher plugin manager
+- name: Install oh my fish
   ansible.builtin.shell: "fish /tmp/oh-my-fish --path=~/.local/share/omf --config=~/.config/omf"
   args:
     executable: /usr/bin/fish
@@ -25,7 +25,7 @@
   ansible.builtin.shell: "source /tmp/fisher && fisher install jorgebucaran/fisher"
   args:
     executable: /usr/bin/fish
-    creates: /home/ian/.config/fish/functions/conf.d/fzf.fish
+    creates: /home/ian/.config/fish/functions/fisher.fish
     
 - name: Install fzf plugin for fish
   ansible.builtin.shell: "fisher install PatrickF1/fzf.fish"
