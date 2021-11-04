@@ -8,6 +8,7 @@
       - bat
       - fd
       - fzf
+      - firefox
       - go
       - kitty
       - gtkmm3
