@@ -1,0 +1,14 @@
+! Swap Command / Win key for ALT
+remove mod1 = Alt_L
+remove mod4 = Super_L
+add mod1 = Super_L
+add mod4 = Alt_L
+
+! Remap ESC to Caps-Lock and Caps-Lock to Right-Ctl
+!keycode 66 = Caps_Lock
+!add Lock = Caps_Lock
+remove Lock = Caps_Lock
+!add Lock = Escape
+!remove Control = Control_R
+keysym Caps_Lock = Escape
+!keysym Escape = Caps_Lock

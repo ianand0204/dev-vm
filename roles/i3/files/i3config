@@ -9,6 +9,7 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
+#set $mod Mod4
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -23,7 +24,7 @@ font pango: Fira Code Retina 8
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3
-exec --no-startup-id vmware-user-suid-wrapper
+#exec --no-startup-id vmware-user-suid-wrapper
 # Remap Caps Lock to CTRL
 exec --no-startup-id /usr/bin/setxkbmap -option "ctrl:nocaps"
 
@@ -36,7 +37,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
-#exec --no-startup-id nm-applet
+exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
 #set $refresh_i3status killall -SIGUSR1 i3status
@@ -55,7 +56,7 @@ bindsym $mod+Return exec kitty
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+o exec rofi -show run 
+bindsym $mod+o exec rofi -show run
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -186,6 +187,8 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
+	tray_output primary
+	position bottom
         status_command i3status
 	font pango: Fira Code Bold 10
 	colors {

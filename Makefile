@@ -44,9 +44,9 @@ vm/bootstrap0:
 		echo "needs_root_rights=yes" > /mnt/etc/X11/Xwrapper.config; \
 		genfstab -U /mnt >> /mnt/etc/fstab; \
 		ln -sf /mnt/usr/share/zoneinfo/America/Los_Angeles /mnt/etc/localtime; \
-		sed -i 's/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /mnt/etc/locale.gen; \
-		arch-chroot /mnt local-gen; \
-		arch-chroot /mnt localectl set-locale LANG=en_US.UTF-8; \
+		sed --in-place 's/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /mnt/etc/locale.gen; \
+		arch-chroot /mnt locale-gen; \
+		arch-chroot /mnt localectl set-locale en_US.UTF-8; \
 		echo $(VMNAME) > /mnt/etc/hostname; \
 		sed -i 's/MODULES=()/MODULES=($(MODULES))/' /mnt/etc/mkinitcpio.conf; \
 		sed -i 's/HOOKS=()/HOOKS=($(HOOKS))/' /mnt/etc/mkinitcpio.conf; \

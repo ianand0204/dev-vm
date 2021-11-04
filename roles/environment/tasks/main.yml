@@ -10,6 +10,13 @@
     dest: "{{ ansible_env.HOME }}/.inputrc"
     state: link
 
+- name: link inputrc
+  file:
+    src: "{{ role_path }}/files/Xmodmap"
+    dest: "{{ ansible_env.HOME }}/.Xmodmap"
+    state: link
+
+
 - name: install ttf-fira-fonts
   become: true
   ansible.builtin.pacman:
