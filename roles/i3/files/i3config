@@ -24,6 +24,8 @@ font pango: Fira Code Retina 8
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id vmware-user-suid-wrapper
+# Remap Caps Lock to CTRL
+exec --no-startup-id /usr/bin/setxkbmap -option "ctrl:nocaps"
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
