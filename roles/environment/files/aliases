@@ -1,0 +1,2 @@
+alias vi="nvim"
+alias dotfiles="make ansible -C /home/ian/dev-vm"

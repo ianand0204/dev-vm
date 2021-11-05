@@ -1,0 +1,41 @@
+- name: link zshrc
+  file:
+    src: "{{ role_path }}/files/zshrc"
+    dest: "{{ ansible_env.HOME }}/.zshrc"
+    state: link
+    force: yes
+
+- name: link zsh_before_oh-my-zssh
+  file:
+    src: "{{ role_path }}/files/zshrc.pre-oh-my-zsh"
+    dest: "{{ ansible_env.HOME }}/.zshrc.pre-oh-my-zsh"
+    state: link
+    force: yes
+
+- name: Download oh-my-zsh
+  ansible.builtin.git:
+    repo: https://github.com/ohmyzsh/ohmyzsh.git 
+    dest: /home/ian/.oh-my-zsh
+    update: no
+
+- name: Download dracula for zsh
+  ansible.builtin.git:
+    repo: https://github.com/dracula/zsh.git
+    dest: /home/ian/.oh-my-zsh/themes/dracula.zsh-theme
+    update: no
+
+      #- name: Create dracula theme lib dir
+      #  ansible.builtin.file:
+      #    state: directory
+      #    path: /home/ian/.oh-my-zsh/themes/dracula.zsh-theme/lib
+      #
+      #- name: Install dracula for zsh
+      #  ansible.builtin.copy:
+      #    dest: "/home/ian/.oh-my-zsh/themes/dracula.zsh-theme/lib/async.zsh"
+      #    src: "/tmp/dracula.zsh-theme/lib/async.zsh"
+      #
+      #- name: Install dracula for zsh
+      #  ansible.builtin.copy:
+      #    dest: "/home/ian/.oh-my-zsh/themes/dracula.zsh-theme"
+      #    src: "/tmp/dracula.zsh-theme/dracula.zsh-theme"
+      #

@@ -59,6 +59,7 @@ vm/bootstrap0:
 		arch-chroot /mnt systemctl enable vmtoolsd; \
 		arch-chroot /mnt systemctl enable vmware-vmblock-fuse; \
 		arch-chroot /mnt systemctl enable sshd; \
+		arch-chroot /mnt systemctl enable docker; \
 		cp -f /etc/systemd/network/20-* /mnt/etc/systemd/network; \
 		echo "root:root" | chpasswd -R /mnt; \
 		reboot; \

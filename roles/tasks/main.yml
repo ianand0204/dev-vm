@@ -1,0 +1,42 @@
+vars:
+  vim_dir: "{{ ansible_env.HOME }}/.vim"
+  vimrc: "{{ ansible_env.HOME }}/.vimrc"
+
+- name: link vimrc
+  file:
+    src: "{{ role_path }}/files/vimrv"
+    dest: "{{vimrc}}"
+    state: link
+    force: yes
+
+- name: Ensure .vim/{autoload,bundle} directory exists
+   file:
+     path: "{{ item }}"
+     state: directory
+     recurse: no
+     mode: 0750
+   loop:
+     - "{{ vim_dir }}"
+     - "{{ vim_dir }}/autoload"
+     - "{{ vim_dir }}/bundle"
+
+- name: Install pathogen
+  ansible.builtin.get_url:
+    dest: "{{ vim_dir }}/autoload/pathogen.vim"
+    url: https://tpo.pe/pathogen.vim
+
+- name: Deploy plugins
+  ansible.builtin.git:
+    dest: "{{ vim_dir }}/bundle/{{ item.name }}"
+    repo: "{{ item.url }}"
+    clone: yes
+    update: yes
+    recursive: no
+    loop:
+      - name: vim-airline
+        url: https://github.com/vim-airline/vim-airline
+      - name: vim-fish
+	url: https://github.com/dag/vim-fish.git
+      - name: vim-fugitive
+        url: https://github.com/tpope/vim-fugitive
+	

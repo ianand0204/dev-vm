@@ -16,6 +16,18 @@
     dest: "{{ ansible_env.HOME }}/.Xmodmap"
     state: link
 
+- name: link Xprofile
+  file:
+    src: "{{ role_path }}/files/xprofile"
+    dest: "{{ ansible_env.HOME }}/.xprofile"
+    state: link
+
+- name: link Xprofile
+  file:
+    src: "{{ role_path }}/files/aliases"
+    dest: "{{ ansible_env.HOME }}/.aliases"
+    state: link
+
 
 - name: install ttf-fira-fonts
   become: true

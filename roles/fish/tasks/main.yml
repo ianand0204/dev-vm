@@ -6,9 +6,10 @@
     force: yes
 
 - name: Download oh-my-fish
-  ansible.builtin.get_url:
-    url: https://get.oh-my.fish
+  ansible.builtin.git:
+    repo: https://github.com/oh-my-fish/oh-my-fish
     dest: /tmp/oh-my-fish
+    update: no
 
 - name: Download fisher plugin manager
   ansible.builtin.get_url:
@@ -16,10 +17,10 @@
     dest: /tmp/fisher
 
 - name: Install oh my fish
-  ansible.builtin.shell: "fish /tmp/oh-my-fish --path=~/.local/share/omf --config=~/.config/omf"
+  ansible.builtin.shell: "bin/install --offline --path=/home/ian/.local/share/omf --config=/home/ian/.config/omf"
   args:
-    executable: /usr/bin/fish
     creates: /home/ian/.config/omf
+    chdir: /tmp/oh-my-fish
 
 - name: Install fisher plugin manager
   ansible.builtin.shell: "source /tmp/fisher && fisher install jorgebucaran/fisher"

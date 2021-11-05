@@ -5,7 +5,7 @@ add mod1 = Super_L
 add mod4 = Alt_L
 
 ! Remap ESC to Caps-Lock and Caps-Lock to Right-Ctl
-!keycode 66 = Caps_Lock
+keycode 66 = Caps_Lock
 !add Lock = Caps_Lock
 remove Lock = Caps_Lock
 !add Lock = Escape
