@@ -17,4 +17,5 @@
     - lightdm
     - i3
     - kitty
-    - zsh
+    - neovim
+      #    - zsh

@@ -1,0 +1,27 @@
+- name: link vimrc
+  file:
+    src: "{{ role_path }}/files/vimrc"
+    dest: "{{ ansible_env.HOME }}/.vimrc"
+    state: link
+    force: yes
+
+- name: Create neovim conf dir
+  file:
+    state: directory
+    path: "/home/ian/.config/nvim"
+
+- name: link init.vim for plugin install
+  file:
+    src: "{{ role_path }}/files/init.vim"
+    dest: "{{ ansible_env.HOME }}/.config/nvim/init.vim"
+    state: link
+    force: yes
+
+- name: Install nodejs for language server support
+  become: true
+  ansible.builtin.pacman:
+    name:
+      - nodejs
+      - npm
+      - yarn
+

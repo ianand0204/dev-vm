@@ -44,5 +44,6 @@ set LC_ALL "en_US.UTF-8"
 set EDITOR "nvim"
 set PAGER "less -FirSwX"
 set MANPAGER "less -FirSwX"
-
+fish_add_path --path /home/ian/.yarn/bin
+#export PATH=$PATH:~/yarn/bin
 source ~/.aliases
