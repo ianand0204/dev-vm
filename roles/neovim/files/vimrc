@@ -1,3 +1,4 @@
-syntax on
+syntax enable
 set nu
 colorscheme dracula
+filetype plugin indent on

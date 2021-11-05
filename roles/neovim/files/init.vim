@@ -13,6 +13,12 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
+Plug 'rust-lang/rust.vim'
+Plug 'vim-syntastic/syntastic'
+Plug 'preservim/tagbar'
+Plug 'universal-ctags/ctags'
+Plug 'dag/vim-fish'
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
 lua << EOF
