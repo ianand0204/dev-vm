@@ -12,7 +12,6 @@ end
 
 --vim.cmd [[packadd packer.nvim]]
 vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile'
-
 require("plugins")
 require("colorscheme")
 require("autocommands")

@@ -5,10 +5,21 @@ return require('packer').startup(function()
   use {'neovim/nvim-lspconfig'}
   use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
   use 'hrsh7th/cmp-nvim-lsp'
-  use 'saadparwaiz1/cmp_luasnip'
-  use 'L3MON4D3/LuaSnip' -- Snippets plugin
+  use { 'tpope/vim-fugitive' }
+  use {
+      'nvim-telescope/telescope.nvim',
+      requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
+  }
+  use { 'tjdevries/nlua.nvim' }
+  use {'kosayoda/nvim-lightbulb'}
+  use {"lukas-reineke/indent-blankline.nvim"}
+
+  require("indent_blankline").setup {
+    show_end_of_line = true,
+  }
 
   if packer_bootstrap then
     require('packer').sync()
   end
+
 end)

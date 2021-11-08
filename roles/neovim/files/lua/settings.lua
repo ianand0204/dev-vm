@@ -39,3 +39,5 @@ o.visualbell = false
 -- Set completeopt to have a better completion experience
 o.completeopt = 'menuone,noselect'
 
+o.list = true
+o.listchars:append("eol:↴")
