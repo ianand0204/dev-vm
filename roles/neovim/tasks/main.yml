@@ -1,21 +1,32 @@
-- name: link vimrc
-  file:
-    src: "{{ role_path }}/files/vimrc"
-    dest: "{{ ansible_env.HOME }}/.vimrc"
-    state: link
-    force: yes
-
-- name: Create neovim conf dir
+- name: created dirs for neovim
   file:
     state: directory
-    path: "/home/ian/.config/nvim"
+    path: "{{item}}"
+  with_items:
+    - "/home/ian/.config/nvim"
+    - "/home/ian/.config/nvim/lua"
 
-- name: link init.vim for plugin install
+- name: link configs
   file:
-    src: "{{ role_path }}/files/init.vim"
-    dest: "{{ ansible_env.HOME }}/.config/nvim/init.vim"
     state: link
-    force: yes
+    path: "{{item.path}}"
+    src: "{{ role_path }}/files/{{item.src}}"
+    force: true
+  with_items:
+    - {src: "init.lua", path: "/home/ian/.config/nvim/init.lua" }
+    - {src: "/lua/settings.lua", path: "/home/ian/.config/nvim/lua/settings.lua"}
+    - {src: "/lua/colorscheme.lua", path: "/home/ian/.config/nvim/lua/colorscheme.lua"}
+    - {src: "/lua/plugins.lua", path: "/home/ian/.config/nvim/lua/plugins.lua"}
+    - {src: "/lua/autocommands.lua", path: "/home/ian/.config/nvim/lua/autocommands.lua"}
+    - {src: "/lua/lsp.lua", path: "/home/ian/.config/nvim/lua/lsp.lua"}
+
+
+      #- name: link init.vim for plugin install
+      #  file:
+      #    src: "{{ role_path }}/files/init.vim"
+      #    dest: "{{ ansible_env.HOME }}/.config/nvim/init.vim"
+      #    state: link
+      #    force: yes
 
 - name: Install nodejs for language server support
   become: true
@@ -24,4 +35,21 @@
       - nodejs
       - npm
       - yarn
+      - ninja
 
+- name: clone lua language server (sumneko)
+  ansible.builtin.git:
+    repo: https://github.com/sumneko/lua-language-server.git
+    dest: /home/ian
+    depth: 1
+    track_submodules: true
+    update: true
+
+- name: Update submodules 
+  ansible.builtin.script:
+    chdir: /home/ian/sumneko
+    cmd: "{{ item }}"
+  with_items:
+    - "cd 3rd/luamake"
+    - "compile/install.sh"
+    - "3rd/luamake/luamake rebuild"
