@@ -1,5 +1,8 @@
 alias vi="nvim"
+alias vim="nvim"
 alias dotfiles="make ansible -C /home/ian/dev-vm"
 abbr -a ls 'exa'
 abbr -a ll 'exa -l'
 abbr -a lll 'exa -la'
+abbr -a vimdiff 'nvim -d'
+

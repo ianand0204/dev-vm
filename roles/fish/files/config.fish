@@ -36,8 +36,6 @@ set -U fish_pager_color_description B3A06D yellow
 set -U fish_pager_color_prefix white --bold --underline
 set -U fish_pager_color_progress brwhite --background=cyan
 
-#alias vi="nvim"
-#alias dotfiles='make ansible -C ~/dev-vm '
 set LANG "en_US.UTF-8"
 set LC_CTYPE "en_US.UTF-8"
 set LC_ALL "en_US.UTF-8"
@@ -46,4 +44,9 @@ set PAGER "less -FirSwX"
 set MANPAGER "less -FirSwX"
 fish_add_path --path /home/ian/.yarn/bin
 #export PATH=$PATH:~/yarn/bin
+export TZ=/usr/share/zoneinfo/America/Los_Angeles
 source ~/.aliases
+
+if test -f /usr/share/autojump/autojump.fish;
+    source /usr/share/autojump/autojump.fish;
+end

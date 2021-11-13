@@ -13,6 +13,7 @@
       - kitty
       - gtkmm3
       - open-vm-tools
+      - reflector
       - wget
       - xclip
       - xorg
@@ -24,3 +25,22 @@
   ansible.builtin.copy:
     dest: "/etc/modprobe.d/nobeep.conf"
     content: "blacklist pcspkr"
+
+- name: Install autojump-fish
+  community.general.pacman:
+    name: autojump
+    executable: yay
+
+- name: Copy reflector config to dest
+  become: yes
+  ansible.builtin.copy:
+    dest: "/etc/xdg/reflector/reflector.conf"
+    src: "{{ role_path }}/files/reflector.conf"
+    force: true
+
+- name: enable reflector
+  become: yes
+  ansible.builtin.systemd:
+    name: reflector.timer
+    enabled: true
+    state: started 

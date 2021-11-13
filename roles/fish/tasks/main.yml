@@ -5,6 +5,14 @@
     state: link
     force: yes
 
+- name: link aliases
+  file:
+    src: "{{ role_path }}/files/aliases"
+    dest: "{{ ansible_env.HOME }}/.aliases"
+    state: link
+    force: yes
+
+
 - name: Download oh-my-fish
   ansible.builtin.git:
     repo: https://github.com/oh-my-fish/oh-my-fish
