@@ -19,7 +19,9 @@
     - {src: "/lua/plugins.lua", path: "/home/ian/.config/nvim/lua/plugins.lua"}
     - {src: "/lua/autocommands.lua", path: "/home/ian/.config/nvim/lua/autocommands.lua"}
     - {src: "/lua/lsp.lua", path: "/home/ian/.config/nvim/lua/lsp.lua"}
-
+    - {src: "/lua/nvim-cmp.lua", path: "/home/ian/.config/nvim/lua/nvim-cmp.lua"}
+    - {src: "/lua/treesitter.lua", path: "/home/ian/.config/nvim/lua/treesitter.lua"}
+    - {src: "/lua/neorg.lua", path: "/home/ian/.config/nvim/lua/neorg.lua"}
 
       #- name: link init.vim for plugin install
       #  file:

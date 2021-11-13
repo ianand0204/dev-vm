@@ -10,22 +10,22 @@ funcsave fish_greeting
 set -g theme_color_scheme dracula
 
 # My color scheme
-#set -U fish_color_normal normal
-#set -U fish_color_command F8F8F2
-#set -U fish_color_quote F1FA8C
-#set -U fish_color_redirection 8BE9FD
-#set -U fish_color_end 50FA7B
-#set -U fish_color_error FF5555
-#set -U fish_color_param 5FFFFF
-#set -U fish_color_comment 6272A4
-#set -U fish_color_match --background=brblue
-#set -U fish_color_selection white --bold --background=brblack
-#set -U fish_color_search_match bryellow --background=brblack
-#set -U fish_color_history_current --bold
-#set -U fish_color_operator 00a6b2
-#set -U fish_color_escape 00a6b2
-#set -U fish_color_cwd green
-#set -U fish_color_cwd_root red
+set -U fish_color_normal normal
+set -U fish_color_command F8F8F2
+set -U fish_color_quote F1FA8C
+set -U fish_color_redirection 8BE9FD
+set -U fish_color_end 50FA7B
+set -U fish_color_error FF5555
+set -U fish_color_param 5FFFFF
+set -U fish_color_comment 6272A4
+set -U fish_color_match --background=brblue
+set -U fish_color_selection white --bold --background=brblack
+set -U fish_color_search_match bryellow --background=brblack
+set -U fish_color_history_current --bold
+set -U fish_color_operator 00a6b2
+set -U fish_color_escape 00a6b2
+set -U fish_color_cwd green
+set -U fish_color_cwd_root red
 set -U fish_color_valid_path --underline
 set -U fish_color_autosuggestion BD93F9
 set -U fish_color_user brgreen

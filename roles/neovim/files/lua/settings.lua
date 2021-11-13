@@ -6,14 +6,16 @@ o.compatible = false
 o.showmatch = true
 o.ignorecase = true
 o.tabstop = 4
-oshiftwidth = 4
+o.shiftwidth = 4
 o.softtabstop = 4
 o.autoindent = true
-o.expandtab = true
+o.expandtab = false
 o.hlsearch = true
 o.incsearch = true
+o.smartcase = true
+o.gdefault=true
 o.number = true
-o.cc="80"
+o.colorcolumn="80"
 o.ruler = true
 o.cursorline = true
 o.ttyfast = true
@@ -37,7 +39,25 @@ o.errorbells = false
 o.visualbell = false
 
 -- Set completeopt to have a better completion experience
-o.completeopt = 'menuone,noselect'
+o.completeopt = 'menu,menuone,noselect'
 
 o.list = true
 o.listchars:append("eol:↴")
+o.inccommand = 'nosplit'
+o.guifont = [[Fira\ Code]]
+o.cmdheight=2
+o.updatetime=300
+o.scrolloff=2
+o.showmode=false
+o.joinspaces=false
+o.undodir="~/.vimdid"
+o.undofile = true
+o.wildmenu = true
+o.wildmode = "list:longest"
+o.formatoptions="tc,r,q,n,b"
+o.diffopt = o.diffopt + "iwhite,algorithm:patience,indent-heuristic"
+o.showcmd = true
+vim.g.which_key_timeout=500
+o.shortmess = o.shortmess + "c" -- dont give 'ins-completion'
+vim.g.load_matchit = true
+vim.g.matchup_matchparen_offscreen = { method = 'popup'}
