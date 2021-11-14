@@ -50,3 +50,7 @@ source ~/.aliases
 if test -f /usr/share/autojump/autojump.fish;
     source /usr/share/autojump/autojump.fish;
 end
+
+set -g theme_powerline_fonts yes
+set -g theme_nerd_fonts no
+export TERMINAL=kitty
