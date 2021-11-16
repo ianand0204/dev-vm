@@ -43,6 +43,8 @@ set EDITOR "nvim"
 set PAGER "less -FirSwX"
 set MANPAGER "less -FirSwX"
 fish_add_path --path /home/ian/.yarn/bin
+fish_add_path --path /home/ian/.cargo/bin
+
 #export PATH=$PATH:~/yarn/bin
 export TZ=/usr/share/zoneinfo/America/Los_Angeles
 source ~/.aliases

@@ -12,8 +12,8 @@ require('telescope').setup {
     set_env = { ["COLORTERM"] = "truecolor" },
     mappings = {
       i = {
-        ['<C-u>'] = false,
-        ['<C-d>'] = false,
+        ['<C-u>'] = true,
+        ['<C-d>'] = true,
       },
     },
   },

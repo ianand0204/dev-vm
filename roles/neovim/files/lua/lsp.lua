@@ -1,4 +1,4 @@
---local nvim_lsp = require 'lspconfig'
+local lspconfig = require 'lspconfig'
 local on_attach = function(_, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -34,7 +34,20 @@ end
 -- nvim-cmp supports additional completion capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-
+lspconfig.rust_analyzer.setup {
+	on_attach = on_attach,
+	flags = {
+		debounce_text_changes = 150
+	},
+	settings = {
+		["rust-analyzer"] = {
+			cargo = {
+				allFeatures = true,
+			},
+		},
+	},
+	capabilities = capabilities,
+}
 -- Enable the following language servers
 -- #local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver' }
 -- for _, lsp in ipairs(servers) do
@@ -43,6 +56,14 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 --     capabilities = capabilities,
 --   }
 -- end
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    virtual_text = true,
+    signs = true,
+    update_in_insert = true,
+  }
+)
+
 
 local lsp_installer = require("nvim-lsp-installer")
 

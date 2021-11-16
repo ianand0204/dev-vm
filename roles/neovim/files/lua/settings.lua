@@ -61,3 +61,7 @@ vim.g.which_key_timeout=500
 o.shortmess = o.shortmess + "c" -- dont give 'ins-completion'
 vim.g.load_matchit = true
 vim.g.matchup_matchparen_offscreen = { method = 'popup'}
+vim.g.rustfmt_autosave = true
+vim.g.rustfmt_emit_files = true
+vim.g.rustfmt_fail_silently = false
+vim.g.rust_clip_command = 'xclip -selection clipboard'

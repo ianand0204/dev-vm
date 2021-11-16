@@ -6,6 +6,7 @@
     state: present
     name:
       - bat
+      - exa
       - fd
       - fzf
       - firefox

@@ -21,7 +21,17 @@ return require('packer').startup(function()
   use { 'tjdevries/nlua.nvim' }
   use {'kosayoda/nvim-lightbulb'}
   use {'lukas-reineke/indent-blankline.nvim' }
+  use {'nvim-lua/lsp_extensions.nvim' }
 
+  use {
+  'sudormrfbin/cheatsheet.nvim',
+
+  requires = {
+    {'nvim-telescope/telescope.nvim'},
+    {'nvim-lua/popup.nvim'},
+    {'nvim-lua/plenary.nvim'},
+    }
+  }
   require("indent_blankline").setup {
     show_end_of_line = true,
   }

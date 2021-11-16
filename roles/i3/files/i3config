@@ -57,8 +57,18 @@ floating_modifier $mod
 
 set_from_resource $back i3wm.background #1D1F21
 set_from_resource $black i3wm.color0 #282A2E
+set_from_resource $grey i3wm.color8
+set_from_resource $lightgrey i3wm.color7
+set_from_resource $white i3wm.color15
+set_from_resource $yellow i3wm.color11
+set_from_resource $red i3wm.color9
+set_from_resource $darkred i3wm.color1
+set_from_resource $green i3wm.color10
 
-
+client.focused $green $green $black $red
+client.focused_inactive $grey $grey $lightgrey $grey
+client.unfocused $grey $grey $lightgrey $grey
+client.urgent $red $red $black $red
 client.background $back
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -78,25 +88,25 @@ bindsym $mod+o exec rofi -show run
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+#bindsym $mod+Left focus left
+#bindsym $mod+Down focus down
+#bindsym $mod+Up focus up
+#bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+shift+v split h
 
 # split in vertical orientation
 bindsym $mod+v split v
