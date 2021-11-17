@@ -22,7 +22,8 @@ return require('packer').startup(function()
   use {'kosayoda/nvim-lightbulb'}
   use {'lukas-reineke/indent-blankline.nvim' }
   use {'nvim-lua/lsp_extensions.nvim' }
-
+  use {'simrat39/rust-tools.nvim' }
+  use {'mfussenegger/nvim-dap' }
   use {
   'sudormrfbin/cheatsheet.nvim',
 

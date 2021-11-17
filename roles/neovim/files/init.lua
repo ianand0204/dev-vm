@@ -34,3 +34,4 @@ require('gitsigns').setup {
 -- luasnip setup
 -- local luasnip = require 'luasnip'
 --luasnip.enable_autosnippets = true
+require('rust-tools').setup({})
