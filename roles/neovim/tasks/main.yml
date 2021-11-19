@@ -5,6 +5,7 @@
   with_items:
     - "/home/ian/.config/nvim"
     - "/home/ian/.config/nvim/lua"
+    - "/home/ian/.local/bin"
 
 - name: link configs
   file:
@@ -37,3 +38,16 @@
       - nodejs
       - npm
       - yarn
+
+- name: Install rust-analyzer
+  ansible.builtin.get_url:
+    url: https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-x86_64-unknown-linux-gnu.gz
+    dest: /tmp/rust-analyzer-x86_64-unknown-linux-gnu.gz
+    mode: 0755
+
+- name: Install rust anaylzer to dir
+  ansible.builtin.shell: |
+    gunzip -c /tmp/rust-analyzer-x86_64-unknown-linux-gnu.gz > ~/.local/bin/rust-analyzer
+    chmod +x ~/.local/bin/rust-analyzer
+  args:
+    creates: /home/.local/bin/rust-analyzer
