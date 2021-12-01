@@ -16,7 +16,7 @@ require("plugins")
 require("colorscheme")
 require("autocommands")
 require("lsp")
-require("nvim-cmp")
+--require("nvim-cmp")
 require("treesitter")
 --require("neorg")
 
@@ -34,4 +34,4 @@ require('gitsigns').setup {
 -- luasnip setup
 -- local luasnip = require 'luasnip'
 --luasnip.enable_autosnippets = true
-require('rust-tools').setup({})
+--require('rust-tools').setup({})

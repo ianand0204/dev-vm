@@ -2,8 +2,8 @@ return require('packer').startup(function()
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
   use {'dracula/vim', as = 'dracula' }
-  use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
-  use 'hrsh7th/cmp-nvim-lsp'
+--  use 'hrsh7th/cmp-nvim-lsp'
+--  use {'hrsh7th/nvim-cmp'}
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path' 
   use 'hrsh7th/cmp-cmdline'
@@ -13,6 +13,8 @@ return require('packer').startup(function()
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
 
   use { 'tpope/vim-fugitive' }
+  use { 'airblade/vim-gitgutter'}
+
   use {
       'nvim-telescope/telescope.nvim',
       requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
@@ -22,17 +24,9 @@ return require('packer').startup(function()
   use {'kosayoda/nvim-lightbulb'}
   use {'lukas-reineke/indent-blankline.nvim' }
   use {'nvim-lua/lsp_extensions.nvim' }
+  use {'rust-lang/rust.vim' }
   use {'simrat39/rust-tools.nvim' }
   use {'mfussenegger/nvim-dap' }
-  use {
-  'sudormrfbin/cheatsheet.nvim',
-
-  requires = {
-    {'nvim-telescope/telescope.nvim'},
-    {'nvim-lua/popup.nvim'},
-    {'nvim-lua/plenary.nvim'},
-    }
-  }
   require("indent_blankline").setup {
     show_end_of_line = true,
   }
@@ -48,9 +42,9 @@ return require('packer').startup(function()
     run = ':TSUpdate',
   }
 
-  use({ "mfussenegger/nvim-lint.nvim",
-    requires = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig"}
-  })
+---  use({ "mfussenegger/nvim-lint.nvim",
+---    requires = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig"}
+---  })
     -- Add git related info in the signs columns and popups
   use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim'}}
 
@@ -62,60 +56,114 @@ use {
 }
 use { 'airblade/vim-rooter' }
 use { 'andymass/vim-matchup' }
--- local function prequire(...)
---local status, lib = pcall(require, ...)
---if (status) then return lib end
---    return nil
---end
+use { 'nvim-lua/completion-nvim'}
+use { 'dag/vim-fish' }
+use { 'mracos/mermaid.vim' }
 
--- local luasnip = prequire('luasnip')
---local cmp = prequire("cmp")
---
---local t = function(str)
---    return vim.api.nvim_replace_termcodes(str, true, true, true)
---end
---
---local check_back_space = function()
---    local col = vim.fn.col('.') - 1
---    if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
---        return true
---    else
---        return false
---    end
---end
---
---_G.tab_complete = function()
---    if cmp and cmp.visible() then
---        cmp.select_next_item()
---    elseif luasnip and luasnip.expand_or_jumpable() then
---        return t("<Plug>luasnip-expand-or-jump")
---    elseif check_back_space() then
---        return t "<Tab>"
---    else
---        cmp.complete()
---    end
---    return ""
---end
---_G.s_tab_complete = function()
---    if cmp and cmp.visible() then
---        cmp.select_prev_item()
---    elseif luasnip and luasnip.jumpable(-1) then
---        return t("<Plug>luasnip-jump-prev")
---    else
---        return t "<S-Tab>"
---    end
---    return ""
---end
---
---vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
---vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
---vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
---vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
---vim.api.nvim_set_keymap("i", "<C-E>", "<Plug>luasnip-next-choice", {})
---vim.api.nvim_set_keymap("s", "<C-E>", "<Plug>luasnip-next-choice", {})
+use {
+		"onsails/lspkind-nvim",
+		config = function()
+			local i = require("tb.icons")
 
-  if packer_bootstrap then
-    require('packer').sync()
-  end
+			require("lspkind").init {
+				symbol_map = {
+					Class = i.lang.class,
+					Color = i.lang.color,
+					Constant = i.lang.constant,
+					Constructor = i.lang.constructor,
+					Enum = i.lang.enum,
+					EnumMember = i.lang.enummember,
+					Event = i.lang.event,
+					Field = i.lang.field,
+					File = i.lang.file,
+					Folder = i.lang.folder,
+					Function = i.lang["function"],
+					Interface = i.lang.interface,
+					Keyword = i.lang.keyword,
+					Method = i.lang.method,
+					Module = i.lang.module,
+					Operator = i.lang.operator,
+					Property = i.lang.property,
+					Reference = i.lang.reference,
+					Snippet = i.lang.snippet,
+					Struct = i.lang.struct,
+					Text = i.lang.text,
+					TypeParameter = i.lang.typeparameter,
+					Unit = i.lang.unit,
+					Value = i.lang.value,
+					Variable = i.lang.variable
+				}
+			}
+		end
+	}
+
+
+use {
+		"hrsh7th/nvim-cmp",
+		requires = "hrsh7th/cmp-nvim-lsp",
+		after = "lspkind-nvim",
+		config = function()
+			require("cmp_nvim_lsp").setup()
+			local cmp = require("cmp")
+			local lspkind = require("lspkind")
+			cmp.setup {
+				snippet = {
+					expand = function(args)
+						luasnip.lsp_expand(args.body)
+					end,
+				},
+				formatting = {
+					format = function(entry, vim_item)
+						vim_item.kind = lspkind.presets.default[vim_item.kind]
+						return vim_item
+					end
+				},
+				min_length = 0, -- allow for `from package import _` in Python
+				mapping = {
+					["<S-Tab>"] = cmp.mapping.select_prev_item(),
+					["<Tab>"] = cmp.mapping.select_next_item(),
+					["<C-p>"] = cmp.mapping.select_prev_item(),
+					["<C-n>"] = cmp.mapping.select_next_item(),
+					["<C-Space>"] = cmp.mapping.complete(),
+					["<C-e>"] = cmp.mapping.close()
+					-- This is handled by nvim-autopairs.
+					-- ["<CR>"] = cmp.mapping.confirm {
+					--   behavior = cmp.ConfirmBehavior.Replace,
+					--   select = true
+					-- }
+				},
+				sources = {
+					{name = "nvim_lsp"},
+					{name = "buffer"},
+					{name = "luasnip"},
+				},
+				experimental = {
+					ghost_text = true
+				}
+
+
+			}
+ -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline(':', {
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    })
+  })
+
+  -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline('/', {
+    sources = {
+      { name = 'buffer' }
+    }
+  })
+		end
+	}
+
+
+--  if packer_bootstrap then
+--    require('packer').sync()
+--  end
 
 end)
