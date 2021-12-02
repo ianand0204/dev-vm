@@ -11,6 +11,17 @@
       - dex
       - powerline
       - powerline-fonts
+      - dunst
+
+- name: install polybar,rofi,1password
+  community.general.pacman:
+    name:
+      - polybar
+      - pinentry-rofi
+      - rofi-dmenu
+      - rofi-pass
+      - 1pass-git
+    executable: yay
 
 - name: created dirs if not present
   file:

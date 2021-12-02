@@ -1,4 +1,4 @@
-#-------------------------------------------------------------------------------
+
 # Prompt
 #-------------------------------------------------------------------------------
 # Do not show any greeting
@@ -56,4 +56,9 @@ end
 
 set -g theme_powerline_fonts yes
 set -g theme_nerd_fonts no
-export TERMINAL=kitty
+
+function export --description 'Set env variable. Alias for `set -gx` for bash compatibility.'
+end
+
+set -gx TERMINAL kitty
+set -gx PINENTRY_USER_DATA type:rofi

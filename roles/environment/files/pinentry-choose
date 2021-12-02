@@ -1,0 +1,20 @@
+#!/bin/sh
+#https://lists.zx2c4.com/pipermail/password-store/2020-May/004081.html
+# PINENTRY_USER_DATA=type:curse or PINENTRY_USER_DATA=type=rofi
+#
+program="/usr/bin/pinentry-curses"
+
+parse_pinentry_env() {
+  IFS=';' read -ra ARGS <<< "$PINENTRY_USER_DATA"
+  for i in "${ARGS[@]}"; do
+    t=$(echo "$i" | cut -d':' -f1)
+    v=$(echo "$i" | sed -e "s/[^:]*://")
+
+    if [ "$t" = "type" ]; then
+      program="/usr/bin/pinentry-$v"
+    fi
+  done
+}
+parse_pinentry_env
+
+$program "$@"

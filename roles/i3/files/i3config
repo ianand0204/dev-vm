@@ -24,7 +24,9 @@ font pango:Fira Code Retina 10
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3
-exec --no-startup-id dunst -c /home/ian/.config/dunst/dunstrc
+exec --no-startup-id dunst
+exec --no-startup-id blueman-applet
+exec_always --no-startup-id $HOME/.local/bin/launch-polybar
 #exec --no-startup-id vmware-user-suid-wrapper
 # Remap Caps Lock to CTRL
 #exec --no-startup-id /usr/bin/setxkbmap -option "ctrl:nocaps"
@@ -209,12 +211,12 @@ bindsym $mod+r mode "$mode_resize"
 	
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-	tray_output primary
-	position bottom
-        status_command i3status
-	font pango: Fira Code Bold 8
-	colors {
-	  background $back
-  	}
-}
+#bar {
+#	tray_output primary
+#	position bottom
+#        status_command i3status
+#	font pango: Fira Code Bold 8
+#	colors {
+#	  background $back
+#  	}
+#}
