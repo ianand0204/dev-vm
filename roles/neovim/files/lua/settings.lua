@@ -39,14 +39,13 @@ o.errorbells = false
 o.visualbell = false
 
 -- Set completeopt to have a better completion experience
-o.completeopt = 'menu,menuone,noselect'
+o.completeopt = 'menuone,noinsert,noselect'
 
 o.list = true
 o.listchars:append("eol:↴")
 o.inccommand = 'nosplit'
 o.guifont = [[Fira\ Code]]
 o.cmdheight=2
-o.updatetime=300
 o.scrolloff=2
 o.showmode=false
 o.joinspaces=false
@@ -65,3 +64,6 @@ vim.g.rustfmt_autosave = true
 vim.g.rustfmt_emit_files = true
 vim.g.rustfmt_fail_silently = false
 vim.g.rust_clip_command = 'xclip -selection clipboard'
+vim.g.signcolumn = true
+vim.g.updatime=300
+

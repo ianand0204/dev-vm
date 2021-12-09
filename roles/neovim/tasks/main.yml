@@ -20,7 +20,6 @@
     - {src: "/lua/plugins.lua", path: "/home/ian/.config/nvim/lua/plugins.lua"}
     - {src: "/lua/autocommands.lua", path: "/home/ian/.config/nvim/lua/autocommands.lua"}
     - {src: "/lua/lsp.lua", path: "/home/ian/.config/nvim/lua/lsp.lua"}
-    - {src: "/lua/nvim-cmp.lua", path: "/home/ian/.config/nvim/lua/nvim-cmp.lua"}
     - {src: "/lua/treesitter.lua", path: "/home/ian/.config/nvim/lua/treesitter.lua"}
     - {src: "/lua/tb", path: "/home/ian/.config/nvim/lua/tb"}
 

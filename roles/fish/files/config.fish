@@ -61,4 +61,11 @@ function export --description 'Set env variable. Alias for `set -gx` for bash co
 end
 
 set -gx TERMINAL kitty
-set -gx PINENTRY_USER_DATA type:rofi
+if test -z $DISPLAY
+	set -gx PINENTRY_USER_DATA type:curses
+else
+	set -gx PINENTRY_USER_DATA type:rofi
+end
+
+alias ssh="kitty +kitten ssh"
+alias mbsync="mbsync -c ~/.config/isync/mbsyncrc"

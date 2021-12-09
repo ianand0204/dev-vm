@@ -31,6 +31,6 @@
 
 - name: install nerd-fonts-complete
   community.general.pacman:
-    name: nerd-fonts-complete
+    name: nerd-fonts-fira-code
     executable: yay
 

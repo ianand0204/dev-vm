@@ -26,6 +26,7 @@ vim.api.nvim_set_keymap('n', '<right>', ':bn<CR>', { noremap = true })
 
 vim.api.nvim_set_keymap('n', 'j', 'gj', {  noremap = true })
 vim.api.nvim_set_keymap('n', 'k', 'gk', { noremap = true })
+vim.api.nvim_set_keymap('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', { noremap = true, silent=true})
 
 vim.api.nvim_set_keymap('n', '<leader><leader>', '<c-^>', { noremap = true })
 vim.api.nvim_exec(
@@ -47,7 +48,14 @@ vim.api.nvim_exec(
 
 vim.api.nvim_exec(
    [[
-     autocmd CursorHold,CursorHoldI *.rs :lua require'lsp_extensions'.inlay_hints{ only_current_line = true }
+     autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
    ]],
    false
+)
+
+vim.api.nvim_exec(
+  [[
+    autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 200)
+]],
+	false
 )

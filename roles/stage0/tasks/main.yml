@@ -17,6 +17,7 @@
     groups:
       - wheel
       - docker
+      - libvirt
 
 - name: Create sudoers.d for wheel group
   copy:
