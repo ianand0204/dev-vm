@@ -28,11 +28,15 @@ exec --no-startup-id dunst
 exec --no-startup-id blueman-applet
 exec --no-startup-id slack
 exec --no-startup-id kitty --name scratchterm
-for_window [instance="scratchterm"] floating enabl:wq!e, resize set 1000 900, move position center, move scratchpad
+for_window [instance="scratchterm"] floating enable, resize set 1000 900, move position center, move scratchpad
 for_window [class="^jetbrains-.+"][window_type=dialog]
 for_window [class="1Password"] floating enable, move position center
 
-assign [class="Slack"]  $ws3
+#for_window [class="Spotify"] floating enabled, resize set 1000x900
+for_window [class="Spotify"] move to workspace $ws4
+for_window [class="Slack"] move to workspace $ws4
+
+#assign [class="Slack"]  $ws3
 #exec --no-startup-id barriers
 exec_always --no-startup-id $HOME/.local/bin/launch-polybar
 #exec --no-startup-id vmware-user-suid-wrapper
